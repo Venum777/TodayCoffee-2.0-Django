@@ -8,21 +8,17 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="parrent">
+    <!-- <div id="parrent">
         <div id="header">
             <h1>1</h1>
         </div>
-        <div id="block1">
-            {% for i in products %}
-            <div class="card">
-                <img class="product-image" src="{{ i.image.url }}" alt="">
-                <h1>Имя: {{ i.name }}</h1>
-                <p>Состав: {{ i.structure }}</p>
-                <p>Рейтинг: {{ i.rate }}</p>
-                <p>Цена: {{ i.price }}</p>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
+        <h1>{{ product_count }}</h1>
+        
+    </div> -->
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Отправить</button>
+</form>
 </body>
 </html>
