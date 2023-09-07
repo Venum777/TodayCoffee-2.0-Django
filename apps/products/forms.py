@@ -18,31 +18,75 @@ class ReservationForm(forms.Form):
 
     full_name = forms.CharField(
         max_length=300, 
-        label='Полное Имя'
+        label='Полное Имя',
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Как к вам обращаться?'
+                }
+            )
     )
+
     sender = forms.EmailField(
         max_length=200, 
-        label='Ваш Email'
+        label='Ваш Email',
+        widget=forms.EmailInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Email'
+                }
+            )
     )
+
     phone_number = forms.CharField(
         max_length=11, 
-        label='Ваш номер телефона'
+        label='Ваш номер телефона',
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Номер телефона'
+                }
+            )
     )
+
     how_many_person = forms.ChoiceField(
-        choices=PERSON_CHOICES
+        choices=PERSON_CHOICES,
+        widget=forms.Select(
+            attrs={
+                'class': 'form-control',
+            }
+        )
     )
-    date = forms.DateField(
-        input_formats=['%d/%m/%Y'], 
-        help_text='Формат: День/Месяц/Год'
+
+    date = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'datepicker',
+                'placeholder': 'Дата резерва',
+                'autocomplete': 'off'
+                }
+            )
     )
+
+    message = forms.CharField(
+        widget=forms.Textarea(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Отправьте нам сообщение'
+                }
+            )
+        )
+
     time = forms.CharField(
         label='Time',
-        widget=forms.TimeInput(format='%H:%M'),
-        help_text='Format: 18:30'
-    )
-    message = forms.CharField(
-        widget=forms.Textarea, 
-        label='Отправьте нам сообщение'
+        widget=forms.TimeInput(
+            format='%H:%M',
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите время резерва. Например 18:30'
+            }
+        )
     )
 
     def clean_time(self):

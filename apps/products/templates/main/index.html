@@ -585,50 +585,42 @@
               <span class="mu-title-bar"></span>
             </div>
             <div class="mu-reservation-content">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione quidem autem iusto, perspiciatis, amet, quaerat blanditiis ducimus eius recusandae nisi aut totam alias consectetur et.</p>
               <form class="mu-reservation-form" method="post">
                 {% csrf_token %}
                 <div class="row">
                   <div class="col-md-6">
-                    <div class="form-group">                       
-                      <input type="text" id="full_name" name="full_name" class="form-control" placeholder="Full Name">
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">                        
-                      <input type="email" id="sender" name="sender" class="form-control" placeholder="Email">
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">                        
-                      <input type="text" id="phone_number" name="phone_number" class="form-control" placeholder="Phone Number">
+                    <div class="form-group">
+                      {{ form.full_name }}
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <select class="form-control" id="how_many_person" name="how_many_person">
-                        <option value="0">How Many?</option>
-                        <option value="1 Person">1 Person</option>
-                        <option value="2 People">2 People</option>
-                        <option value="3 People">3 People</option>
-                        <option value="4 People">4 People</option>
-                        <option value="5 People">5 People</option>
-                        <option value="6 People">6 People</option>
-                        <option value="7 People">7 People</option>
-                        <option value="8 People">8 People</option>
-                        <option value="9 People">9 People</option>
-                        <option value="10 People">10 People</option>
-                      </select>                      
+                      {{ form.sender }}
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <input type="text" name="date" class="form-control" id="datepicker" placeholder="Date">              
+                      {{ form.phone_number }}
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      {{ form.how_many_person }}
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      {{ form.date }}
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      {{ form.time }}
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
-                      <textarea class="form-control" id="message" name="message" cols="30" rows="10" placeholder="Your Message"></textarea>
+                      {{ form.message }}
                     </div>
                   </div>
                   <button type="submit" class="mu-readmore-btn">Make Reservation</button>
@@ -1139,7 +1131,7 @@
 
   <!-- Start Map section -->
   <section id="mu-map">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9207.358598888495!2d-85.64847801496286!3d30.183918972289003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0000000000000000%3A0x2320479d70eb6202!2sDillard&#39;s!5e0!3m2!1sbn!2sbd!4v1462359735720" width="100%" height="100%" frameborder="0"allowfullscreen></iframe>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2575.0770165214262!2d73.08358717549348!3d49.80341973374136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4243472f6960484f%3A0xf7757fefd7dc20ac!2sToday%20Coffee!5e0!3m2!1sru!2skz!4v1693908620347!5m2!1sru!2skz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </section>
   <!-- End Map section -->
 
@@ -1157,7 +1149,7 @@
             <a href="#"><span class="fa fa-youtube"></span></a>
           </div>
           <div class="mu-footer-copyright">
-            <p>Designed by <a rel="nofollow" href="http://www.markups.io/">MarkUps.io</a></p>
+            <p>Designed by developper <a rel="nofollow" href="https://github.com/Venum777/">Venum777</a></p>
           </div>         
         </div>
       </div>
