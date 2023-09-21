@@ -4,11 +4,12 @@ import uuid
 
 # Django
 from django.views.generic import View
-from django.contrib.auth.models import User
 from django.core.handlers.wsgi import WSGIRequest
 from django.db.models.query import QuerySet
-from django.http.response import HttpResponse
-from django.http.response import HttpResponseRedirect
+from django.http.response import (
+    HttpResponse, 
+    HttpResponseRedirect
+)
 from django.shortcuts import render
 from django.core.mail import send_mail
 
@@ -127,7 +128,7 @@ class ProductView(View):
             }
         )
     
-    def post(self, request):
+    def post(self, request: WSGIRequest) -> HttpResponse:
         form = ReservationForm(request.POST)
         if form.is_valid():
             full_name = form.cleaned_data['full_name']

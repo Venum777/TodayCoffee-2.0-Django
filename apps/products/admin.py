@@ -1,11 +1,21 @@
+# Python
+from typing import Union , TypeAlias
+
+# Django
 from django.contrib import admin
 
-from .models import Product, Genre, Discounts
-from typing import Union , TypeAlias
+# Local
+from .models import (
+    Product, 
+    Genre, 
+    Discounts,
+    Basket
+)
 
 
 MyType: TypeAlias = tuple[tuple[Union[str ,dict[str,list[str]]]]]
 
+@admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
 
     list_display:list[str] = (
@@ -43,19 +53,24 @@ class ProductAdmin(admin.ModelAdmin):
         
     )
 
+@admin.register(Genre)
 class GenresAdmin(admin.ModelAdmin):
      list_display:list[str] = (
         'name',
     )
 
-
+@admin.register(Discounts)
 class DiscountsAdmin(admin.ModelAdmin):
      list_display:list[str] = (
         'discounts',
         'expiration_date'
     )
+
+@admin.register(Basket)
+class BasketAdmin(admin.ModelAdmin):
+     list_display:list[str] = (
+        'user_id',
+        'product_id'
+    )
     
 
-admin.site.register(Product, ProductAdmin)
-admin.site.register(Genre, GenresAdmin)
-admin.site.register(Discounts, DiscountsAdmin)

@@ -34,3 +34,9 @@
 
 >> datetime - end time discounts
 
+# Basket
+
+>> User_id
+
+>> Product_id
+

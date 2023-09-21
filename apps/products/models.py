@@ -1,10 +1,12 @@
-from django.db import models
-
-# Create your models here.
+# Python
 import datetime
 
+# Django
 from django.db import models
-# from django.contrib.auth.models import User
+
+# Local
+from auths.models import MyUser
+
 
 class Genre(models.Model):
     """Product genre."""
@@ -93,3 +95,31 @@ class Discounts(models.Model):
 
     def str(self) -> str:
         return self.discounts
+    
+class Basket(models.Model):
+    """Basket products."""
+
+    user_id = models.OneToOneField(
+        to=MyUser,
+        default=None,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        verbose_name='пользователь',
+        related_name='basket_user'
+    )
+
+    product_id = models.ForeignKey(
+        to=Product,
+        on_delete=models.CASCADE,
+        verbose_name='продукт',
+        default=None,
+        related_name='basket_products'
+    )
+
+    class Meta:
+        verbose_name = 'корзина'
+        verbose_name_plural = 'корзины'
+
+    def str(self) -> str:
+        return f'{self.user_id} добавляет в корзину {self.product_id}'
+    
