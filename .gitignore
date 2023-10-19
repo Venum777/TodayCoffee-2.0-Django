@@ -11,3 +11,6 @@ __pycache__/
 .isort.cfg
 .idea
 .vscode
+
+staticfiles/
+media/

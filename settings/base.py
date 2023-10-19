@@ -12,9 +12,9 @@ sys.path.append(BASE_DIR)
 # C://Program Files/Django/apps
 sys.path.append(os.path.join(BASE_DIR, 'apps'))
 
-SECRET_KEY = 'django-insecure-)-op!dh)#sg40$-jb096sb(b521gqnsv523*%$t8cnb7mmntzu'
+SECRET_KEY = config('SECRET_KEY', cast=str)
 
-DEBUG = True
+DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = []
 
