@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>TodayCoffee | Register</title>
+	<title>TodayCoffee | Login</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -35,66 +35,43 @@
 				<form class="login100-form validate-form" method="post">
 					{% csrf_token %}
 					<span class="login100-form-title">
-						Регистрация
+						Авторизация
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						{{ reg_form.email }}
+						{{ log_form.email }}
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
-                            <img src="{% static 'images/icons/mail.png' %}" alt="">
-						</span>
-					</div>
-
-                    <div class="wrap-input100 validate-input">
-						{{ reg_form.first_name }}
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-                            <img src="{% static 'images/icons/user.png' %}" alt="">
-						</span>
-					</div>
-
-                    <div class="wrap-input100 validate-input">
-						{{ reg_form.last_name }}
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-                            <img src="{% static 'images/icons/user.png' %}" alt="">
-						</span>
-					</div>
-
-                    <div class="wrap-input100 validate-input">
-						{{ reg_form.phone_number }}
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-                            <img src="{% static 'images/icons/smartphone.png' %}" alt="">
+							<img src="{% static 'images/icons/mail.png' %}" alt="">
 						</span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						{{ reg_form.password }}
+						{{ log_form.password }}
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
-                            <img src="{% static 'images/icons/password.png' %}" alt="">
-						</span>
-					</div>
-
-                    <div class="wrap-input100 validate-input" data-validate = "Password is required">
-						{{ reg_form.password2 }}
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-                            <img src="{% static 'images/icons/password.png' %}" alt="">
+							<img src="{% static 'images/icons/password.png' %}" alt="">
 						</span>
 					</div>
 					
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
-							Зарегистрироваться
+							Войти
 						</button>
 					</div>
 
+					<div class="text-center p-t-12">
+						<span class="txt1">
+							Забыли
+						</span>
+						<a class="txt2" href="#">
+							Почту / Пароль?
+						</a>
+					</div>
+
 					<div class="text-center p-t-136">
-						<a class="txt2" href="{% url 'login' %}">
-							У вас уже есть аккаунт?
+						<a class="txt2" href="{% url 'register' %}">
+							У вас нет аккаунта?
 							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
 						</a>
 					</div>
@@ -102,7 +79,7 @@
 			</div>
 		</div>
 	</div>
-
+	
 <!--===============================================================================================-->	
 	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
 <!--===============================================================================================-->
