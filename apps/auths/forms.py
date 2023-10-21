@@ -3,32 +3,6 @@ from django import forms
 from .models import MyUser
 
 
-# class RegisterForm(forms.ModelForm):
-#     """Registration form for CustomUser."""
-    
-#     password2 = forms.CharField(
-#         label='Повторите пароль',
-#         max_length=100,
-#         widget=forms.PasswordInput()
-#     )
-#     class Meta:
-#         model = MyUser
-#         fields = (
-#             'email',
-#             'first_name',
-#             'last_name',
-#             'phone_number',
-#             'password'
-#         )
-#         widgets = {
-#             'password': forms.PasswordInput(),
-#         }
-
-#     def save(self, commit: bool = ...) -> MyUser:
-#         self.full_clean()
-#         return super().save(commit)
-
-
 class RegisterForm(forms.ModelForm):
     """Registration form for CustomUser."""
     
