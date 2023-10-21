@@ -43,6 +43,14 @@ class MyUserManager(BaseUserManager):
 
         return self.create_user(email, password, **extra_fields)
 
+    def update_user(self, user_id, **kwargs):
+            user = self.get(id=user_id)
+            for key, value in kwargs.items():
+                setattr(user, key, value)
+
+            user.save()
+            return user
+
 
 class MyUser(
     AbstractBaseUser, 
