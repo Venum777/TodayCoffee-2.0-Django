@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ваш профиль</h1>
+    <h2>Информация о профиле</h1>
+    <p>ID: {{ user.id }}</p>
+    <form action="" method="post">
+    {% csrf_token %}
+    <p>Имя - <input type="text" name="first_name" value="{{ user.first_name }}"></p>
+    <p>Фамилия - <input type="text" name="last_name" value="{{ user.last_name }}"></p>
+    <p>Почта - <input type="text" name="email" value="{{ user.email }}"></p>
+    <p>Номер телефона - <input type="text" name="phone_number" value="{{ user.phone_number }}"></p>
+    <input type="submit" value="Save">
+    </form>
+</body>
+</html>

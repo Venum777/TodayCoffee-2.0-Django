@@ -108,3 +108,51 @@ class LoginView(View):
         login(request, user)
 
         return redirect('home')
+
+
+class ProfileView(View):
+
+    template_name: str = 'profile.html'
+
+    def get(
+        self,
+        request: WSGIRequest,
+        *args: tuple,
+        **kwargs: dict
+    )-> HttpResponse:
+        return render(
+            request=request,
+            template_name=self.template_name,
+            context={
+                'user': request.user
+            }
+        )
+    
+    def post(
+        self,
+        request: WSGIRequest,
+        *args: tuple,
+        **kwargs: dict
+    )-> HttpResponse:
+        if request.method == 'POST':
+            user_id = request.user.id
+            first_name: str = request.POST.get('first_name')
+            last_name: str = request.POST.get('last_name')
+            email: str = request.POST.get('email')
+            phone_number: str = request.POST.get('phone_number')
+
+            MyUser.objects.update_user(
+                user_id=user_id,
+                first_name=first_name,
+                last_name=last_name,
+                email=email,
+                phone_number=phone_number
+            )
+            return redirect('home')
+        return render(
+            request=request,
+            template_name=self.template_name,
+            context={
+                'user': request.user
+            }
+        )
