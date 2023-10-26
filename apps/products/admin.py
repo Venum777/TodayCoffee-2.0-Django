@@ -9,7 +9,8 @@ from .models import (
     Product, 
     Genre, 
     Discounts,
-    Basket
+    Cart,
+    CartItem
 )
 
 
@@ -66,11 +67,18 @@ class DiscountsAdmin(admin.ModelAdmin):
         'expiration_date'
     )
 
-@admin.register(Basket)
-class BasketAdmin(admin.ModelAdmin):
+@admin.register(CartItem)
+class CartItemAdmin(admin.ModelAdmin):
      list_display:list[str] = (
-        'user_id',
-        'product_id'
+        'user',
+        'product',
+        'quantity'
     )
-    
 
+@admin.register(Cart)
+class CartAdmin(admin.ModelAdmin):
+     list_display:list[str] = (
+        'user',
+        'total_price',
+        'created_tampstamp'
+    )

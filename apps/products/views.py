@@ -21,60 +21,6 @@ from .models import (
 )
 from .forms import ReservationForm
 
-    
-def main(request: WSGIRequest) -> HttpResponse:
-    template_name: str = 'products/index.html'
-    products: QuerySet[Product] = Product.objects.all().order_by('id')
-    return render(
-        request=request,
-        template_name=template_name,
-        context={
-            'products': products,
-        }
-    )
-
-
-class AllProductView(View):
-    template_name: str = 'products/all_product.html'
-
-    def get(self, request: WSGIRequest) -> HttpResponse:
-        form = ReservationForm()
-        return render(
-            request=request,
-            template_name=self.template_name,
-            context={'form':form}
-        )
-    
-    def post(self, request):
-        form = ReservationForm(request.POST)
-        if form.is_valid():
-            full_name = form.cleaned_data['full_name']
-            sender = form.cleaned_data['sender']
-            phone_number = form.cleaned_data['phone_number']
-            how_many_person = form.cleaned_data['how_many_person']
-            date = form.cleaned_data['date']
-            time = form.cleaned_data['time']
-            message = form.cleaned_data['message']
-
-            recipients = ["venums46@gmail.com"]
-            subject = "New Reservation"
-            email_message = f'''
-                Имя: {full_name}\n
-                Номер телефона: {phone_number}\n
-                {how_many_person} человек\n
-                Дата резерва: {date} | в {time}\n
-                Сообщение:\n 
-                {message}
-            '''
-            try:
-                send_mail(subject, email_message, sender, recipients)
-                return HttpResponseRedirect('')
-            
-            except Exception as e:
-                return HttpResponse("Произошла ошибка при отправке письма.")
-
-        return render(request, self.template_name, {'form': form})
-        
 
 class ProductView(View):
     
