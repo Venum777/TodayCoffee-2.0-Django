@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.core.handlers.wsgi import WSGIRequest
 from django.http.response import HttpResponse
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.forms.models import ModelFormMetaclass
 from django.contrib.auth.hashers import make_password
 from django.core.exceptions import ValidationError
@@ -12,9 +12,15 @@ from django.contrib.auth.hashers import check_password
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
 #Local
-from .forms import RegisterForm, LoginForm, ChangePasswordForm, ProfileForm
+from .forms import (
+    RegisterForm, 
+    LoginForm, 
+    ChangePasswordForm, 
+    ProfileForm
+)
 from .models import MyUser
 from . import utils
+
 
 class RegisterView(View):
     """Registration View."""
@@ -114,9 +120,9 @@ class LoginView(View):
 
 
 class ProfileView(View):
+    """Profile View."""
 
     template_name: str = 'profile.html'
-    # form: ModelFormMetaclass = ProfileForm
 
     def get(
         self,
@@ -172,7 +178,25 @@ class ProfileView(View):
 
         return redirect('profile')
 
+
+class LogoutView(View):
+    """Logout View."""
+
+    def get(
+        self,
+        request: WSGIRequest,
+        *args: tuple,
+        **kwargs: dict,
+    ) -> HttpResponse:
+        if request.user:
+            logout(request)
+        
+        return redirect('home')
+
+
 class ChangePasswordView(View):
+    """Change password View."""
+
 
     template_name: str = 'change_password.html'
     form: ModelFormMetaclass = ChangePasswordForm
