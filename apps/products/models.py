@@ -8,6 +8,9 @@ from django.db import models
 from auths.models import MyUser
 
 
+def product_directory_path(instance, filename):
+    return f'image/product/{instance.genres}/{filename}'
+
 class Genre(models.Model):
     """Product genre."""
 
@@ -62,8 +65,8 @@ class Product(models.Model):
 
     image = models.ImageField(
         verbose_name='изображение',
-        upload_to='image/',
-        default='image/unknown.png'
+        upload_to=product_directory_path,
+        default='image/product/unknown.png'
     )
 
     class Meta:
@@ -93,33 +96,50 @@ class Discounts(models.Model):
         verbose_name = 'скидка'
         verbose_name_plural = 'скидки'
 
-    def str(self) -> str:
+    def __str__(self) -> str:
         return self.discounts
+
+
+class CartItem(models.Model):
+
+    user = models.ForeignKey(
+        MyUser, 
+        on_delete=models.CASCADE
+    )
+
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE
+    )
+
+    quantity = models.PositiveIntegerField(
+        default=1
+    )
+
+    def __str__(self):
+        return f"{self.quantity} x {self.product.name}"
+
+    def total_price(self):
+        return self.product.price * self.quantity
     
-class Basket(models.Model):
-    """Basket products."""
+    class Meta:
+        verbose_name = 'Товары в корзине'
+        verbose_name_plural = 'Товары в корзинах'
 
-    user_id = models.OneToOneField(
-        to=MyUser,
-        default=None,
-        on_delete=models.CASCADE,
-        primary_key=True,
-        verbose_name='пользователь',
-        related_name='basket_user'
-    )
+class Cart(models.Model):
+    user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
+    items = models.ManyToManyField(CartItem)
+    created_tampstamp = models.DateTimeField(auto_now_add=True)
 
-    product_id = models.ForeignKey(
-        to=Product,
-        on_delete=models.CASCADE,
-        verbose_name='продукт',
-        default=None,
-        related_name='basket_products'
-    )
+    def total_price(self):
+        total = 0
+        for item in self.items.all():
+            total += item.total_price()
+        return total
 
     class Meta:
         verbose_name = 'корзина'
         verbose_name_plural = 'корзины'
 
-    def str(self) -> str:
-        return f'{self.user_id} добавляет в корзину {self.product_id}'
+    def __str__(self) -> str:
+        return f'{self.user} добавляет в корзину {self.items}'
     

@@ -2,11 +2,9 @@
 from django.urls import path
 
 # Local
-from .views import AllProductView, ProductView
-from . import views
+from .views import ProductView
 
 urlpatterns = [
-    path('all/', AllProductView.as_view()),
     path('', ProductView.as_view(), name='home'),
     path('genre/<int:genre_id>/', ProductView.as_view()),
 ]

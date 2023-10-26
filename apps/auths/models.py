@@ -10,6 +10,10 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.db import models
 
 
+def user_directory_path(instance, filename):
+    return f'image/user/user_{instance.id}/{filename}'
+
+
 class MyUserManager(BaseUserManager):
 
     def create_user(
@@ -43,14 +47,6 @@ class MyUserManager(BaseUserManager):
 
         return self.create_user(email, password, **extra_fields)
 
-    def update_user(self, user_id, **kwargs):
-            user = self.get(id=user_id)
-            for key, value in kwargs.items():
-                setattr(user, key, value)
-
-            user.save()
-            return user
-
 
 class MyUser(
     AbstractBaseUser, 
@@ -78,6 +74,12 @@ class MyUser(
         max_length=10
     )
 
+    profile_picture = models.ImageField(
+        verbose_name='изображение',
+        upload_to=user_directory_path,
+        default='image/user/user.png'
+    )
+
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
@@ -89,3 +91,7 @@ class MyUser(
     def __str__(self):
         return self.email
     
+    @property
+    def file_type(self):
+        LAST: int = -1
+        return self.profile_picture.url.split('.')[LAST]
