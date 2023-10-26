@@ -22,25 +22,20 @@
     <h2>Информация о профиле</h1>
     <img id="img1" src="{{ user.profile_picture.url }}" alt="">
     <p>ID: {{ user.id }}</p>
-    <!-- <form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <p>Имя - <input type="text" name="first_name" value="{{ user.first_name }}"></p>
-    <p>Фамилия - <input type="text" name="last_name" value="{{ user.last_name }}"></p>
-    <p>Почта - <input type="text" name="email" value="{{ user.email }}"></p>
-    <p>Номер телефона - <input type="text" name="phone_number" value="{{ user.phone_number }}"></p>
-    <p>Изменить фото профиля - <input type="file" name="profile_picture"></p>
-    <input type="submit" value="Save">
-    </form>
-    <br>
-    <a href="{% url 'change_password' %}">
-        <input class="btn1" type="button" value="Сбросить пароль">
-    </a> -->
-    <!-- <hr>
-    <hr> -->
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ ctx_form.as_p }}
         <input type="submit" value="Save">
     </form>
+    <br>
+    <br>
+    <a href="{% url 'change_password' %}">
+        <input class="btn1" type="button" value="Сбросить пароль">
+    </a>
+    <br>
+    <br>
+    <a href="{% url 'logout' %}">
+        <input type="button" value="Выйти из уч.записи">
+    </a>
 </body>
 </html>
