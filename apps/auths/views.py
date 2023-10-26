@@ -19,7 +19,7 @@ from .forms import (
     ProfileForm
 )
 from .models import MyUser
-from . import utils
+from abstracts.utils import generate_string
 
 
 class RegisterView(View):
@@ -165,7 +165,7 @@ class ProfileView(View):
         profile_picture: InMemoryUploadedFile =\
         request.FILES.get('profile_picture')
 
-        profile_picture.name = utils.generate_string() + ".png"
+        profile_picture.name = generate_string() + ".png"
 
         form.update_user(
             user_id=user_id,

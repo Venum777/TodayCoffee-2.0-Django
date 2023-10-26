@@ -40,3 +40,24 @@
 
 >> Product_id
 
+# Delivery
+
+>> To which city
+
+>> address
+
+>> house
+
+>> apartment
+
+>> frame
+
+>> housing
+
+>> floor
+
+>> entrance
+
+>> payment
+
+>> comment
