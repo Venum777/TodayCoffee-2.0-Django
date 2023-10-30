@@ -1,0 +1,75 @@
+# TodayCoffee
+
+> ## Models
+
+-----------------------------------
+> # Auths models
+
+My user
+    > First name
+
+    > Last name
+
+    > Email
+
+    > Phone number
+
+    > Profile picture
+
+    > Is active
+
+    > Is staff
+
+-----------------------------------
+> # Product models
+
+Genre
+    > Name
+
+Product
+    > Name
+
+    > Structure
+
+    > Price
+
+    > Genres
+
+    > Rate
+
+    > Image
+
+Discounts
+    > Discounts
+
+    > Expiration date
+
+CartItem
+    > User
+
+    > Product
+
+    > Quantity
+
+Cart
+    > User
+
+    > Items
+
+    > Created Tampstamp
+
+-----------------------------------
+> # Delivery models
+
+Delivery
+    > City
+
+    > Address
+
+    > House
+
+    > Apartment
+
+    > Payment
+
+    > Comment
