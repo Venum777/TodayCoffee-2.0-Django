@@ -1,63 +1,21 @@
-# TodayCoffee
+# django_mvc
 
-> ## Models
-> Product
+Django MVC
 
-> Genre
+# How to deploy ?
 
-> Discounts
+## Install requirements
 
+pip install -r tools/requirements/base.txt
 
-# Product
+## Apply migrations
 
->> name
+python3 manage.py migrate
 
->> structure
+## Create superuser
 
->> price
+python3 manage.py createsuperuser
 
->> genres
+## Runserver
 
->> rate
-
->> image
-
-
-# Genre
-
->> name
-
-
-# Discounts
-
->> Product(id)
-
->> datetime - end time discounts
-
-# Basket
-
->> User_id
-
->> Product_id
-
-# Delivery
-
->> To which city
-
->> address
-
->> house
-
->> apartment
-
->> frame
-
->> housing
-
->> floor
-
->> entrance
-
->> payment
-
->> comment
+python3 manage.py runserver
