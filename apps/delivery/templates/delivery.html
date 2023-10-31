@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Доставка</h1>
+    <p>Ваш заказ</p>
+    {% for c in cart_item %}
+        <p>Имя '{{ c.product }}' количество - <input type="number" value="{{ c.quantity }}"></p>
+    {% endfor %}
+    <hr>
+    <p>Всего {{ cart_item_price }}тг</p>
+    <hr>
+    <p>Оформить заказ</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ ctx_form.as_p }}
+        <input type="submit" value="Save">
+    </form>
+</body>
+</html>

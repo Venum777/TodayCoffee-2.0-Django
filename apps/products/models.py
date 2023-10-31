@@ -117,9 +117,6 @@ class CartItem(models.Model):
 
     def __str__(self):
         return f"{self.quantity} x {self.product.name}"
-
-    def total_price(self):
-        return self.product.price * self.quantity
     
     class Meta:
         verbose_name = 'Товары в корзине'
@@ -139,7 +136,4 @@ class Cart(models.Model):
     class Meta:
         verbose_name = 'корзина'
         verbose_name_plural = 'корзины'
-
-    def __str__(self) -> str:
-        return f'{self.user} добавляет в корзину {self.items}'
     
