@@ -1,4 +1,10 @@
+# Django
 from django.db import models
+from django.utils import timezone
+
+# local
+from cart.models import CartItem
+from auths.models import MyUser
 
 
 class Delivery(models.Model):
@@ -38,6 +44,13 @@ class Delivery(models.Model):
         ('ter', 'Терминал у курьера')
     )
 
+    user = models.ForeignKey(
+        MyUser,
+        default=MyUser,
+        verbose_name='пользователь',
+        on_delete=models.CASCADE
+    )
+    
     city = models.CharField(
         verbose_name='город',
         choices=CITIES_OF_KAZAKHSTAN,
@@ -46,7 +59,7 @@ class Delivery(models.Model):
     )
 
     address = models.CharField(
-        verbose_name='адресс',
+        verbose_name='адрес',
         max_length=200
     )
 
@@ -71,6 +84,20 @@ class Delivery(models.Model):
         null=True,
         blank=True
     )
+
+    created_tampstamp = models.DateTimeField(
+        default=timezone.now
+    )
+
+    class Meta:
+        ordering = (
+            'city', 
+            'address', 
+            'house', 
+            'apartment'
+        )
+        verbose_name = 'доставка'
+        verbose_name_plural = 'доставки'
 
     def __str__(self):
         return self.city

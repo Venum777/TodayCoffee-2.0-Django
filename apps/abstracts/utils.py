@@ -1,5 +1,23 @@
+# Python
 import random
 
+# Django
+from django.conf import settings
+from django.core.mail import EmailMessage
+
+
+def send_email(
+    subject: str,
+    body: str,
+    to_emails: list[str]
+) -> None:
+    email = EmailMessage(
+        subject,
+        body,
+        settings.EMAIL_FROM,
+        to_emails
+    )
+    email.send()
 
 def generate_string() -> str:
     simbols: str = (

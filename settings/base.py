@@ -7,9 +7,8 @@ from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# C://Program Files/Django
 sys.path.append(BASE_DIR)
-# C://Program Files/Django/apps
+
 sys.path.append(os.path.join(BASE_DIR, 'apps'))
 
 SECRET_KEY = config('SECRET_KEY', cast=str)
@@ -28,10 +27,11 @@ DJANGO_APPS = [
 ]
 
 PROJECT_APPS = [
-    'products.apps.ProductsConfig',
-    'auths.apps.AuthsConfig',
     'abstracts.apps.AbstractsConfig',
-    'delivery.apps.DeliveryConfig'
+    'auths.apps.AuthsConfig',
+    'cart.apps.CartConfig',
+    'delivery.apps.DeliveryConfig',
+    'products.apps.ProductsConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS
@@ -68,14 +68,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'settings.wsgi.application'
 
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': config('DBNAME', cast=str),
+#         'USER': config('USER', cast=str),
+#         'PASSWORD': config('PASSWORD', cast=str),
+#         'HOST': config('DBHOST', cast=str),
+#         'PORT': config('DBPORT', cast=str)
+#     }
+# }
+
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {

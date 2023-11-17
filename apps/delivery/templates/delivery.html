@@ -3,22 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Delivery</title>
+    <style>
+        body{
+            background-image: url('https://www.advotics.com/wp-content/uploads/2022/02/surat-jalan-01-1-4.png');
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-attachment: fixed;
+        }
+        #parrent{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+        }
+        #block_left{
+            width: 70%;
+            height: 100%;
+        }
+        #block_right{
+            width: 30%;
+            height: 100%;
+            align-self: center;
+        }
+        #block1{
+            width: 100%;
+            height: auto;
+        }
+        .block_products{
+            width: 100%;
+            height: 40%;
+            border-bottom: 1px solid black;
+        }
+        .img{
+            width: 200px;
+            height: 200px;
+        }
+        #block2{
+            width: 300px;
+            height: auto;
+            background-color:#D7D7D7;
+            margin-left: 100px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Доставка</h1>
-    <p>Ваш заказ</p>
-    {% for c in cart_item %}
-        <p>Имя '{{ c.product }}' количество - <input type="number" value="{{ c.quantity }}"></p>
-    {% endfor %}
-    <hr>
-    <p>Всего {{ cart_item_price }}тг</p>
-    <hr>
-    <p>Оформить заказ</p>
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ ctx_form.as_p }}
-        <input type="submit" value="Save">
-    </form>
+    <div id="parrent">
+        <div id="block_left">
+            <h1>Доставка</h1>
+            <div id="block1">
+                <p>Оформить заказ</p>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ ctx_form.as_p }}
+                    <input type="submit" value="Save">
+                </form>
+            </div>
+        </div>
+        <div id="block_right">
+            <div id="block2">
+                <h1>Корзина</h1>
+                {% for c in cart_items %}
+                <div class="block_products">
+                    <form method="post">
+                        {% csrf_token %}
+                        <img class="img" src="{{ c.product.image.url }}" alt="error">
+                        <p>Имя {{ c.product.name }}</p>
+                        <p>Состав {{ c.product.structure }}</p>
+                        <p>Цена {{ c.product.price }}</p>
+                        <p>количество - <input type="number" name="quantity" value="{{ c.quantity }}"></p>
+                        <input type="hidden" name="product_id" value="{{ c.product.id }}">
+                        <input type="submit" name="delete" value="Delete">
+                    </form>
+                </div>
+                {% endfor %}
+                <p style="border: 1px solid black;">Всего {{ total_price }}тг</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

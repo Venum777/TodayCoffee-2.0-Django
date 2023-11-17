@@ -40,9 +40,11 @@ Product
     > Image
 
 Discounts
-    > Discounts
+    > Product discount
 
-    > Expiration date
+    > Product precent
+
+    > Expiration date discount
 
 CartItem
     > User

@@ -273,6 +273,12 @@
                                   <h4 class="media-heading"><a href="#">{{ i.name }}</a></h4>
                                   <span class="mu-menu-price">{{ i.price }}₸</span>
                                   <p>{{ i.structure }}</p>
+                                  <form method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="product_id" value="{{ i.id }}">
+                                    <!-- <input type="number" name="quantity" value="{{ c.quantity }}"> -->
+                                    <input type="submit" name="add_cart" value="Add Cart">
+                                  </form>
                                 </div>
                               </div>
                             </li>

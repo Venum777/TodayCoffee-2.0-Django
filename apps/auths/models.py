@@ -13,7 +13,6 @@ from django.db import models
 def user_directory_path(instance, filename):
     return f'image/user/user_{instance.id}/{filename}'
 
-
 class MyUserManager(BaseUserManager):
 
     def create_user(
@@ -96,10 +95,23 @@ class MyUser(
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
-    def __str__(self):
-        return self.email
     
     @property
     def file_type(self):
         LAST: int = -1
         return self.profile_picture.url.split('.')[LAST]
+    
+    class Meta:
+        ordering = (
+            'first_name', 
+            'last_name', 
+            'email', 
+            'phone_number'
+        )
+        verbose_name = 'пользователь'
+        verbose_name_plural = 'пользователи'
+
+    def __str__(self):
+        return f'Имя: {self.first_name}\
+              | Фамилия: {self.last_name}\
+                  | Почта: {self.email}'

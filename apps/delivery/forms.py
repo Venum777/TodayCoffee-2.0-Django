@@ -1,20 +1,17 @@
 from django import forms
+from django.forms import ModelForm
+from django.db import models
 
-from .models import Delivery
+from delivery.models import Delivery
+from auths.models import MyUser
+
 
 class DeliveryForm(forms.ModelForm):
-
     class Meta:
         model = Delivery
-        fields = (
-            'city',
-            'address',
-            'house',
-            'apartment',
-            'payment',
-            'comment'
-        )
-    
-    def save(self, commit: bool = ...) -> Delivery:
+        fields = "__all__"
+        exclude = ['user', 'created_tampstamp']
+
+    def save(self, commit=True, *args, **kwargs):
         self.full_clean()
-        return super().save(commit)
+        return super().save(commit=commit, *args, **kwargs)

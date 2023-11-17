@@ -10,15 +10,14 @@ from django.http.response import (
     HttpResponse, 
     HttpResponseRedirect
 )
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 
 # Local
-from .models import (
-    Product,
-    Genre,
-    Discounts
-)
+from products.models.genre import Genre
+from products.models.product import Product
+from products.models.discounts import Discounts
+from cart.models import CartItem
 from .forms import ReservationForm
 
 
@@ -75,6 +74,7 @@ class ProductView(View):
         )
     
     def post(self, request: WSGIRequest) -> HttpResponse:
+        cart = CartItem(request.POST)
         form = ReservationForm(request.POST)
         if form.is_valid():
             full_name = form.cleaned_data['full_name']
@@ -101,6 +101,24 @@ class ProductView(View):
             
             except Exception as e:
                 return HttpResponse("Произошла ошибка при отправке письма.")
-
-        return render(request, self.template_name, {'form': form})
+        
+        product_id = request.POST.get('product_id')
+        # quantity = request.POST.get('quantity')
+        cart_item = CartItem.objects.filter(
+            user=request.user, 
+            product=product_id
+        ).first()
+        if 'add_cart' in request.POST:
+            if cart_item:
+                cart_item.quantity += 1
+                cart_item.save()
+            else:
+                CartItem.objects.add_to_cart(
+                    user_id=request.user.id,
+                    product_id=product_id,
+                    # quantity=quantity
+                )
+                return redirect('home')
+            
+        return redirect('home')
     

@@ -5,13 +5,9 @@ from typing import Union , TypeAlias
 from django.contrib import admin
 
 # Local
-from .models import (
-    Product, 
-    Genre, 
-    Discounts,
-    Cart,
-    CartItem
-)
+from products.models.genre import Genre
+from products.models.product import Product
+from products.models.discounts import Discounts
 
 
 MyType: TypeAlias = tuple[tuple[Union[str ,dict[str,list[str]]]]]
@@ -63,22 +59,7 @@ class GenresAdmin(admin.ModelAdmin):
 @admin.register(Discounts)
 class DiscountsAdmin(admin.ModelAdmin):
      list_display:list[str] = (
-        'discounts',
-        'expiration_date'
-    )
-
-@admin.register(CartItem)
-class CartItemAdmin(admin.ModelAdmin):
-     list_display:list[str] = (
-        'user',
-        'product',
-        'quantity'
-    )
-
-@admin.register(Cart)
-class CartAdmin(admin.ModelAdmin):
-     list_display:list[str] = (
-        'user',
-        'total_price',
-        'created_tampstamp'
+        'product_discount',
+        'product_precent',
+        'expiration_date_discount'
     )
